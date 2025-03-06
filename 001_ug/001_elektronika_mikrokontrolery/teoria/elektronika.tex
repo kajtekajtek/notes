@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\title{Podstawy Elektroniki i Programowania Mikrokontrolerów}
+
+\begin{document}
+
+\maketitle
+
+\newpage \tableofcontents
+
+\section{Podstawowe informacje o prądzie
+elektrycznym}
+
+\subsection{Ładunki i pola}
+Oddziaływanie elektromagnetyczne należy do jednego z czterech fundamentalnych oddziaływań w fizyce. 
+\subsubsection{Ładunek elektryczny}
+\textbf{Ładunek elektryczny} należy traktować jako dodatkową cechę materii, która pozwala mu na oddziaływanie z innymi ładunkami poprzez pole elektromagnetyczne. 
+\begin{itemize}
+    \item Ładunek może mieć dwa przeciwne znaki: dodatni (+) i ujemny (-) decydujące o zwrocie oddziaływań
+    \item Ładunek dodatni - proton
+    \item Ładunek ujemny - elektron
+    \item Ładunek jest skwantowany, to znaczy może występować tylko w ściśle określonych porcjach będących wielokrotnością ładunku elementarnego elektronu e.
+    \item Jednostka ładunku - Kulomb (C) - ładunek elektryczny przenoszony przez prąd o natężeniu 1A w czasie 1s
+    \item Całkowity ładunek elektryczny układu zamkniętego nie ulega zmianie
+\end{itemize}
+
+\subsubsection{Pole elektryczne}
+\textbf{Pole elektryczne} to pole wektorowe określające w każdym punkcie \textbf{siłę działającą na jednostkowy, spoczywający ładunek elektryczny}. Pole elektryczne, niezależnie od układu ładunków, które je wytworzyły, można całkowicie zdefiniować, podając wartość natężenia pola $E(x, y, z)$ w każdym punkcie $(x, y, z)$ rozpatrywanego obszaru przestrzeni.
+
+Umieszczenie ładunku \(q\) w polu \(\vec{E}\) powoduje powstanie siły $\vec{F}$
+
+\textbf{Natężenie pola elektrycznego}: $\vec{E} = \frac{\vec{F}}{q}$
+
+\subsubsection{Potencjał pola elektrycznego}
+\textbf{Potencjał pola elektrycznego} w punkcie to stosunek pracy $W$ potrzebnej do przeniesienia ładunku $q$ z tego punktu do nieskończoności.
+$$V = \frac{W}{q}$$
+Jednostka potencjału jest 1 V (wolt) równy 1 J / 1 C (dżulowi na kulomb).
+
+\subsection{Prąd elektryczny}
+\textbf{Prąd elektryczny} to uporządkowany ruch ładunków elektrycznych. Ilościowo prąd elektryczny najprościej określa się przez ustalenie wielkości ładunku przepływającego w jednostce czasu przez jakąś wyodrębnioną powierzchnię. Tak zdefiniowana wielkość nosi nazwę natężenia prądu elektrycznego, a jej jednostka jest amper (1 A).
+\begin{itemize}
+\item Natężenie prądu stacjonarnego, czyli niezmiennego w czasie lub wielkość średnia natężenia prądu: $I=\frac{q}{t}$
+\item Natężenie prądu jako funkcja czasu: $i(t)=\frac{d}{dt}q(t)$
+\end{itemize}
+
+\subsection{Napiecie elektryczne}
+\textbf{Różnica potencjałów elektrycznych między dwoma punktami obwodu elektrycznego} lub pola elektrycznego. Napięcie elektryczne jest to stosunek pracy wykonanej przeciwko polu, podczas przenoszenia ładunku elektrycznego między punktami, dla których określa się napięcie, do wartości tego ładunku.
+$$U_{AB} = V_B - V_A = \frac{W_{A \rightarrow B}}{q}$$
+Jednostka napiecia jest V (Wolt)(Patrz: potencjał elektryczny).
+
+\subsection{Praca i moc}
+Praca to miara ilości energii przekazywanej między układami fizycznymi.
+\begin{itemize}
+\item $W = U \cdot I \cdot t = q \cdot U$
+\item Jej jednostką jest J (dżul).
+\end{itemize}
+
+Moc to wielkość określająca pracę wykonaną w jednostce czasu przez układ fizyczny.
+\begin{itemize}
+    \item $P=\frac{W}{t} = I \cdot U = I^2 \cdot R = \frac{U^2}{R}$
+    \item Jej jednostką jest W (Wat).
+\end{itemize}
+
+\subsection{Prawo Ohma}
+Prawo fizyki głoszące \textbf{proporcjonalność natężenia prądu płynącego przez przewodnik do napięcia panującego między końcami przewodnika}.
+$$I(t) \sim U(t)$$
+$$i(t) = \frac{1}{R}\cdot u(t)$$
+$$I=\frac{U}{R}$$
+
+\begin{itemize}
+    \item $R$ to \textbf{rezystancja} (opór). Jej jednostką jest $\Omega$ (Ohm).
+    \item Elementy, które spełniają prawo Ohma to \textbf{rezystory}. Nie wszystkie elementy elektroniczne spełniają prawo Ohma.
+\end{itemize}
+
+\subsection{Siła elektromotoryczna}
+Gdyby do jednego końca przewodu podłączyć naładowane elektrycznie ciało, a do drugiego identyczne, ale z niedoborem ładunku, to prąd przez przewodnik płynąłby tylko do czasu osiągnięcia równowagi przy ciągłym zmniejszaniu się napięcia na jego końcach. Zatem \textbf{do utrzymania stałej różnicy potencjałów potrzebne są źródła napięcia}. SEM to \textbf{zdolność źródła do wytwarzania różnicy potencjałów}. Jest mierzona w woltach i można ją traktować jako idealną różnicę potencjałów, którą źródło wytwarza, by wprowadzić elektrony w ruch.
+
+\subsection{Prawa Kirchhoffa}
+\subsubsection{Prawo Kirchhoffa I (prądowe)}
+Suma natężeń prądów wpływających do węzła jest równa sumie natężeń prądów wypływających z tego węzła.
+\subsubsection{Prawo Kirchhoffa II (napięciowe)}
+W zamkniętym obwodzie (oczku) suma spadków napięć równa jest sumie sił elektromotorycznych występujących w tym obwodzie.
+
+\subsection{Źródła}
+\subsubsection{Źródło napięciowe}
+Źródło dające stałą SEM (napięcie) niezależnie od obciążenia.
+\begin{itemize}
+    \item Źródło idealne - nie uwzględnia np. rezystancji wewnętrznej
+    \item Źródło rzeczywiste - bateria, zasilacz
+\end{itemize}
+
+\subsubsection{Źródło prądowe}
+Źródło dające stały prąd niezależnie od obciążenia.
+\begin{itemize}
+    \item Źródło idealne - nie uwzględnia np. rezystancji wewnętrznej
+    \item Źródło rzeczywiste - akumulator samochodowy
+\end{itemize}
+
+\subsection{Laczenie rezystencji}
+\begin{itemize}
+    \item Polaczenie szeregowe: $R=\sum R_i$
+    \item Polaczenie rownolegle: $R=\sum \frac{1}{R_i}$
+\end{itemize}
+
+\end{document}
