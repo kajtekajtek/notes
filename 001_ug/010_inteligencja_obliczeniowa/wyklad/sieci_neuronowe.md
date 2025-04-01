@@ -79,3 +79,48 @@ Algorytm dąży do minimalizacji błędu popełnianego przez sieć (minimalizacj
 5. Czy sieć nauczona? Czy upłynęło max epok?
 	- TAK – KONIEC
 	- NIE – wróć do punktu 2
+
+## Uczenie sieci: konfiguracja, hiperparametry, ocenianie
+
+### Współczynnik uczenia się 
+(ang. **learning rate, gain**) to **hiperparametr** regulujący szybkość uczenia się, często oznaczany jako $\eta$ (eta). **Hiperparametr** to parametr regulujący cały proces uczenia się. Zwykłe parametry (np. wagi w SSN), podlegają zmianom podczas uczenia się.
+Jeśli jest mały, to proces uczenia się jest wolny, ale stabilny. Jesli jest duży, to proces jest szybki, ale wykonuje duże ”kroki” i może przeoczyć dobre rozwiązanie.
+Współczynnik uczenia się może być stały lub może być zmieniany w czasie uczenia (iteracje, epoki) wg jakiegoś wzoru. We wzorach często używane sa inne hiperparametry np. **decay** (zanik) d lub **momentum** (pęd). Przykładowy wzór na zmianę η pomiędzy (n + 1) a n iteracją (zwany: time-based schedule):
+- $\eta_{n+1}=\frac{\eta_n}{1+d\cdot n}$
+
+To jak będziemy manipulować współczynnikiem uczenia się oraz wzorem na poprawianie wag może prowadzić do zauważalnych zmian w wydajności i szybkości uczenia się sieci. Na przestrzeni lat powstało wiele optimizerów np.
+- **SGD** (Stochastic Gradient Descent)
+- **Adam**
+- **RMSProp**
+
+### Epoki
+**Epoka** (ang. epoch, czytaj: ’ipok) to fragment procesu uczenia, w którym **przeszliśmy dokładnie jeden raz przez każdą próbkę ze zbioru treningowego ucząc się na niej**. Algorytm uczący ma zadaną pewną **liczbę epok** - hiperparametr mówiący, ile razy musimy przejść przez każdą próbkę w training set (ile razy powtórzyć pojedynczą epokę). Liczba epok musi być dopasowana do skomplikowania problemu i sieci. Może wynosić 10, 100 lub nawet 1000. Jeśli wielkość zbioru treningowego to **7000**, a liczba epok to **100**, to wówczas algorytmu wstecznej propagacji uruchomi się **700 000** razy.
+
+### Batch
+**Batch**, lub **partia**, to fragment epoki. To część procesu uczenia, w którym przeszliśmy przez **pewną liczbę próbek ze zbioru treningowego**, po czym aktualizujemy wagi w sieci neuronowej. **Wag w sieci neuronowej nie aktualizujemy po każdej próbce, tylko po każdym batchu**. Każda waga jest średnią z wag obliczonych z próbek batcha.
+**Wielkość batcha** (ang. batch size) to kolejny hiperparametr, który silnie oddziałowuje na proces uczenia się.
+- Duże batche powodują, że uczenie się jest wolniejsze, ale droga do celu jest prostsza.
+- Dobór najlepszej wielkości batcha może wymagać kilku eksperymentów i porównywania wyników (np. na krzywej uczenia się).
+- Typowe wielkości są potęgami dwójki (ze względu na architekturę komputera), czyli np.: 1, 2, 4, 8, 32, 64, 128, albo nawet wielkość całego zbioru treningowego.
+- Wielu badaczy twierdzi, że małe batche (do 32) działają najefektywniej.
+
+### Iteracje
+Parametrem, który automatycznie powstaje po wybraniu wielkości batcha jest **liczba iteracji** wynosząca $\frac{\text{wielkość zbioru treningowego}}{\text{wielkość batcha}}$. Uwaga: gdy zbiór treningowy nie dzieli się równo na batche, można go zmniejszyć (dopasować) lub po prostu zaakceptować, że ostatni batch będzie mniejszy
+
+### Zbiór walidacyjny
+- **Zbiór treningowy** (ang. training set) - używany w procesie uczenia do poprawiania wag sieci.
+- **Zbiór testowy** (ang. test set) - używany po zakończeniu procesu uczenia, do sprawdzenia dokładności sieci.
+- **Zbiór walidacyjny** (ang. validation set) - zbiór do testowania w trakcie uczenia. Pomaga odpowiedzieć na pytanie: czy uczymy się dalej ze zbioru treningowego, czy już mamy dobrą wydajność i kończymy.
+
+### Krzywa uczenia się
+**Krzywa uczenia się** (ang. learning curve) - wykres przedstawiający jaka jest wydajność sieci neuronowej (oś Y) w czasie uczenia, liczbie epok (oś X). 
+- Właściwie najczęściej mamy do czynienia z dwiema krzywymi na jednym wykresie: dla zbioru treningowego i zbioru walidacyjnego.
+- Przez wydajność możemy rozumieć dokładność sieci jako klasyfikatora (performance, accuracy) lub odstępstwo wyników sieci od tych prawdziwych, funkcja straty (loss, optimization
+
+![Learning curves](../img/learning_curves.png)
+
+### Niedouczenie się
+Gdy model sieci neuronowej jest zbyt prosty, nie uda jej się dobrze wyuczyć z danych. Mowa wówczas o niedouczeniu się (underfitting).
+
+### Przeuczenie się
+Sieć przeuczona zbyt dokładnie nauczyła się zbioru treningowego, co może spowodować, że w zbiorze walidacyjnym będzie popełniała więcej błędów.
