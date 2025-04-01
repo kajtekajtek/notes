@@ -58,3 +58,24 @@ Gradient to **pole wektorowe dla funkcji liczbowej.** W każdym punkcie dziedzin
 W przypadku sieci, funkcja f , którą chcemy zminimalizować (patrząc na jej gradient), to **funkcja błędu / straty** (ang. loss function). Zwykle wybiera się funkcję **MSE** (Mean Squared Error) lub **Cross Entropy**.
 Funkcja MSE porównuje przewidywany output z prawdziwym outputem dla jednej próbki (te dwa wektory są jej argumentami).
 - $MSE(output_{pred}, output_{real}) = \sum_i \frac{(output_{pred}^i - output_{real}^i)^2}{n}$
+
+W trenowaniu sieci poprawiamy jednak wagi W w sieci. Należy zdefiniować więc funkcję straty następująco, z innym argumentem:
+- $Loss_{input}(W)=MSE(ForwardProop_w(input), output_{real})$
+
+dla pewnej próbki input.
+W praktyce bierzemy też często większy zestaw próbek (tzw. batch, ale o tym później) i obliczamy średnią funkcję:
+- $Loss_{batch}(W)=\sum_{input\in batch}\frac{MSE(ForwardProp_w(input), output_{real}}{|batch|}$
+
+### Spadek (wzdłuż) gradientu
+Jak szukać minimum dla funkcji straty? Trzeba poruszać się w kierunku minimum, patrząc na pochodne cząstkowe (czyli gradient funkcji). Służy do tego procedura zwana **spadkiem (wzdłuż) gradientu** (ang. **gradient descent**). Algorytm działa w krokach -iteracjach.
+
+### Wsteczna propagacja
+Wsteczna propagacja (ang. back propagation) to **sposób uczenia sieci**, który idzie **od warstwy wyjściowej, ”w lewo”, do warstwy wejściowej poprawiając wagi**. Poprawianie każdej z wagi następuje poprzez **spadek gradientu** dla niej.
+Algorytm dąży do minimalizacji błędu popełnianego przez sieć (minimalizacja funkcji straty, loss function). Ogólny schemat:
+1. Zainicjalizuj sieć z losowymi wagami (random **W** )
+2. Wybierz próbkę (lub batch) danych ze zbioru treningowego. Oblicz wartości wyjściowe sieci dla próbki (dla **input** obliczamy $output_{pred}$ )
+3. Oblicz błąd sieci (np. **MSE** porównujące $output_{pred}$ i $output_{real}$)
+4. Popraw wagi W poprzez propagację wsteczną błędu (minimalizujemy **Loss(W)**)
+5. Czy sieć nauczona? Czy upłynęło max epok?
+	- TAK – KONIEC
+	- NIE – wróć do punktu 2
