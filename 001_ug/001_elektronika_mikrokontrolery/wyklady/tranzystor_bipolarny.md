@@ -94,19 +94,38 @@ $V_O=V_C$, $V_{i} \sim V_B$
 W praktyce parametry tranzystora zależą między innymi od temperatury.
 
 ## Podstawowy układ pracy
+Tranzystor bipolarny npn, obszar aktywny, DC.
 ![Podstawowy układ pracy](../img/uklad_pracy.png)
-
+- $U_{in} = U_{RB} + U_{BE} \text{, } U_{RB}=I_B \cdot R_B \text{, } U_{BE} = 0.6V$
+- $U_{CC}=U_{RC}+U_{CE} \text{, } U_{RC}=I_C\cdot R_C$
+- $I_C=\beta\cdot I_B$
+- $U_{out} = U_{CC} - I_C \cdot R_C$
+- $I_C = \beta\cdot I_B$
+- $I_B = \frac{U_{in} - 0.6}{R_B}$
+- $U_{out} = U_{CC} - \beta\cdot\frac{R_C}{R_B}\cdot(U_{in} - 0.6)$
 ## Punkt pracy
+Przez punkt pracy tranzystora rozumie się **wartości prądów i napięć, które występują na tranzystorze przy braku zewnętrznego sygnału sterującego**. Zewnętrzny sygnał moduluje prąd i napięcie kolektora wokół punktu pracy.
+Stałe (DC) wartości napięć $U_B, U_C, U_E$. (oznaczane dużymi literami)
+Wejściowy sygnał zmienny moduluje punkt pracy. (oznaczane małymi literami)
 
 ## Równanie oczkowe DC i AC
-
+- $U_{CE}=U_{CC}-\beta\cdot(\frac{U_{in}-0.6}{R_B})\cdot R_C \leftarrow DC$ 
+- $u_{CE}=\Delta U_{CE}=-\beta\cdot\frac{R_C}{R_B}\cdot u_{in} \leftarrow AC$
 ## Układy cyfrowe
 
 ### Inwerter tranzystorowy
+Dobieramy $R_C$ i $R_B$ tak aby tranzystor pracował albo w nasyceniu albo w odcięciu.
+- $R_B$  małe
+- $R_C$ duże
+![Inwerter](../img/inverter.png)
+- $U_{in} < 1V \rightarrow V_{out} = 5V$
+- $U_{in} > 1V \rightarrow V_{out} = 0V$
 
 ### NOR
+![NOR](../img/nor.png)
 
 ### NAND
+![NAND](../img/nand.png)
 
 ### Źródło prądowe
 
