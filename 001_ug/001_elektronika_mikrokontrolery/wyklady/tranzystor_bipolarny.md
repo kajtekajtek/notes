@@ -128,14 +128,29 @@ Dobieramy $R_C$ i $R_B$ tak aby tranzystor pracował albo w nasyceniu albo w odc
 ![NAND](../img/nand.png)
 
 ### Źródło prądowe
+![Źródło prądowe](../img/zrodlo_pradowe.png)
+- $I_C=\frac{U_{ref}-0.6}{R_E}$
+
+### Sterowanie LED
+![Sterowanie LED](../img/sterowanie_led.png)
 
 ### Sterowanie przekaźnikiem
+![Sterowanie przekaźnikiem](../img/sterowanie_przekaznikiem.png)
 
 ### Mostek H
+![Mostek H](../img/H-bridge.png)
+Sterowanie silnikiem.
+- zmiana kierunku obrotu
+- silnik DC
+Zwykle tranzystory MOSFET.
 
 ## Układy analogowe
 
 ### Wtórnik emiterowy
+![Wtórnik emiterowy](../img/wtornik_emiterowy.png)
+- $U_{out}=U_{in}-0.6$
+- $u_{out}=u_{in}$
+- $u_{in}=\frac{i_E \cdot R_E}{\frac{i_E}{\beta + 1}}=(\beta + 1) \cdot R_E$
 
 ### Dioda Zenera i wtórnik w zasilaczu
 
