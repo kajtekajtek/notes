@@ -1,9 +1,4 @@
-# Notatki z wykładu „Podstawy kryptografii”  
-**Prowadzący:** Andrzej M. Borzyszkowski (Instytut Informatyki, Uniwersytet Gdański)  
-**Semestr letni 2024/2025**  
-[inf.ug.edu.pl/~amb/](http://inf.ug.edu.pl/~amb/)
-
----
+# Kryptografia klucza prywatnego a kryptografia klucza publicznego
 
 ## 1. Zarządzanie kluczami prywatnymi  
 - **Paradoks kryptografii klucza prywatnego:**  
@@ -49,7 +44,7 @@
      ```
      m = Dec(K_dᴮ, c)
      ```  
-   - Tylko Bob ma K_dᴮ ⇒ tylko on może odczytać m.  
+   - **Tylko Bob ma K_dᴮ ⇒ tylko on może odczytać m**.
 2. **Podpis cyfrowy (autentyczność, nieodrzeczalność):**  
    - Role kluczy zamienione: prywatny Alicji (K_dᴬ) i publiczny Alicji (Kₑᴬ).  
    - Alicja “szyfruje” (podpisuje) m:  
@@ -60,15 +55,18 @@
      ```
      V(Kₑᴬ, m, s) ⇒ true/false
      ```  
-   - Dowodzi, że tylko Alicja (znająca K_dᴬ) mogła stworzyć s.
+   - Dowodzi, że tylko **Alicja (znająca K_dᴬ) mogła stworzyć s**.
 
 ---
 
 ## 4. Atak _man-in-the-middle_  
 - **Scenariusz:** Mariola podszywa się naprzemiennie pod Alicję i Boba:  
-  1. Mariola as Alicja → Bob: podaje swój fałszywy klucz publiczny.  
-  2. Bob szyfruje wiadomość do Alicji; wysyła Marioli, która odczytuje i ponownie szyfruje pod oryginalny klucz Alicji.  
-  3. Podobnie po drugiej stronie.  
+    - Mariola jako Alicja → Bolek: podaje klucz publiczny
+    - Bolek → Mariola jako Alicja: szyfruje wiadomość dla Alicji
+    - Mariola jako Bolek → Alicja: podaje klucz publiczny
+    - Alicja → Mariola jako Bolek: szyfruje wiadomość dla Bolka
+    - Alicja i Bolek myślą, że rozmawiają ze sobą
+    - ale cała korespondencja przechodzi przez Mariolę  
 - **Konsekwencja:** Alicja i Bob myślą, że rozmawiają ze sobą, ale wszystkie wiadomości przechodzą przez Mariolę.  
 - **Obrona:**  
   - **Uwierzytelnianie** kluczy publicznych – upewnienie się, że klucz rzeczywiście należy do deklarowanej osoby.  
@@ -76,7 +74,35 @@
 
 ---
 
-## 5. Teoretyczne własności kryptografii asymetrycznej  
+## 5. Kryptografia asymetryczna, cechy
+- W kryptografii symetrycznej **uwierzytelnianie jest łatwe**
+    - Bolek wie, że skoro wiadomość jest zaszyfrowana
+    wspólnym kluczem Kab , to autorem musi być Alicja
+    - ale nie może tego udowodnić przed sądem, skoro on też
+    może przygotować taką wiadomość
+- W kryptografii asymetrycznej **tylko Alicja może zaszyfrować wiadomość swoim kluczem prywatnym**
+    - nie tylko Bolek może to sprawdzić, każdy może
+    - w zasadzie sprawdzić można jedynie, że Ke oraz Kd
+    stanowią parę
+    - pozostaje problem związku Alicji z tą parą kluczy
+- Mariola ogłasza, że klucz publiczny należy do Alicji i podpisuje dokument
+    - Bolek weryfikuje, że podpis został złożony przez pasujący klucz prywatny
+    - to nie to samo, co pewność, że podpis złożyła Alicja
+- **Zalety**:
+    - nie ma konieczności wcześniejszej wymiany tajnego klucza
+    - klucz prywatny nie jest z nikim wymieniany
+    - jest tylko jeden taki klucz
+- **Wady**:
+    - zdecydowanie mniejsza wydajność
+        - więcej się szyfruje i uwierzytelnia (serwery)
+        - zasoby są mniejsze (karta kryptograficzna) niż w kryptografii symetrycznej
+    - problem uwierzytelnienia klucza publicznego
+        - Mariola ogłasza, że klucz publiczny należy do Alicji
+        - a Bolek sądzi, że komunikuje się z Alicją oraz, że ona jest autorką podpisanych dokumentów
+
+---
+
+## 6. Teoretyczne własności kryptografii asymetrycznej  
 1. **Odpowiednik odporności na atak z wybranym tekstem jawnym:**  
    - Szyfr asymetryczny musi być _niedeterministyczny_, bo klucz publiczny jest jawny.  
 2. **Wielokrotne szyfrowanie:**  
@@ -86,7 +112,7 @@
 
 ---
 
-## 6. Szyfr hybrydowy  
+## 7. Szyfr hybrydowy  
 Łączy zalety obu podejść:  
 1. **Szyfrowanie:**  
    - Generujemy jednorazowy klucz sesyjny K (symetryczny).  
@@ -110,7 +136,7 @@
 
 ---
 
-## 7. Podpis cyfrowy w praktyce  
+## 8. Podpis cyfrowy w praktyce  
 - **Problem wydajności:** podpisywanie długich wiadomości kluczem asymetrycznym jest kosztowne.  
 - **Rozwiązanie:**  
   1. Obliczamy skrót wiadomości:  
@@ -130,7 +156,7 @@
 
 ---
 
-## 8. Ataki na funkcje skrótu i obrona  
+## 9. Ataki na funkcje skrótu i obrona  
 ### 8.1. Atak kolizyjny (Alice-Bob)  
 1. Alicja ma dwie wersje m₁ i m₂, obie mogą zostać podpisane.  
 2. Oblicza skróty h(m₁), h(m₂) i szuka kolizji: h(m₁) = h(m₂).  
