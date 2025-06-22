@@ -1,4 +1,17 @@
 # Szyfry blokowe
+
+## Funkcje pseudolosowe  
+- Oznaczenie: \[n\] = zbiór ciągów bitów długości n, operacja ⊕ = dodawanie bitów mod 2.  
+- Funkcja F: \[n\] × \[n\] → \[n\], efektywna w czasie wielomianowym (PPT), klucz k ∈ \[n\].  
+- F jest **pseudolosowa**, jeśli przeciwnik w zasobach PPT nie odróżni F(k,·) od prawdziwej losowej funkcji f, nawet znając część jej wartości.  
+- Funkcje pierwszego typu (z zakresem ≤2ⁿ) jest 2ⁿ, drugiego typu (permutacje) jest (2ⁿ)!.  
+- Sam zapis f: \[n\]→\[n\] wymaga wykładniczych zasobów, więc PPT-owy F jest cenny.
+
+## Permutacje pseudolosowe  
+- F: \[n\]×\[n\]→\[n\] jest **permutacją z kluczem**, jeśli dla każdego k, F(k,·) jest bijekcją.  
+- F jest **pseudolosową permutacją**, jeśli F(k,·) i jej odwrotność są nieodróżnialne od losowych permutacji.  
+- Można wymagać, by i F⁻¹(k,·) była pseudolosowa.
+
 **Szyfry blokowe** to szyfry symetryczne operujące na blokach danych o ustalonym rozmiarze.
 - **Działają w rundach**: w każdej rundzie dane są poddawane kolejnym operacjom (dodanie klucza, podstawienie bitów/bajtów, permutacje, itp.).
 - Po zakończeniu określonej liczby rund **otrzymujemy zaszyfrowany blok**.

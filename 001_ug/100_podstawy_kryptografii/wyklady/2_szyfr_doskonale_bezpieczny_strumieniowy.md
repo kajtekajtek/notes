@@ -1,25 +1,24 @@
 # Szyfr doskonale bezpieczny
 Przestrzeń **wiadomości M, kluczy K i kryptogramów C**
-Funkcje szyfrowania i odszyfrowywania
-- **Enc** : M × K → C , być **może niedeterministyczna**
-- **Dec** : C × K → M, Dec(Enc(m, k), k) = m **deterministycznie**
-- na pewno **m1 =/= m2 implikuje Enc(m1, k)̸ = Enc(m2, k)**
-Rozkłady prawdopodobieństwa:
-- P(m = m0), m0 ∈ M, P(k = k0), k0 ∈ K , **niezależne rozkłady**
-System jest **doskonale bezpieczny**, jeśli
-- P(m = m0) = P(m = m0|c = c0), c0 ∈ C
-- tzn.: **po poznaniu kryptogramu wiedza na temat tekstu jawnego jest taka sama jak przedtem**
-- inaczej, zdarzenia m = m0 oraz c = c0 są niezależne
-problemik techniczny: P(c = c0) > 0
+
+Funkcje szyfrowania i odszyfrowywania:
+- **Enc** : `M × K → C` , być **może niedeterministyczna**
+- **Dec** : `C × K → M`, `Dec(Enc(m, k), k) = m` **deterministyczna**
+- `m1 =/= m2 -> Enc(m1, k) =/= Enc(m2, k)`
+- `P(m = m0), m0 ∈ M`, `P(k = k0), k0 ∈ K` to **niezależne rozkłady**
+- System jest **doskonale bezpieczny**, jeśli `P(m = m0) = P(m = m0|c = c0), c0 ∈ C`
+    - tzn.: **po poznaniu kryptogramu wiedza na temat tekstu jawnego jest taka sama jak przedtem**
+    - inaczej, zdarzenia `m = m0` oraz `c = c0` są niezależne
+- problemik techniczny: P(c = c0) > 0
 
 ### Wniosek 1:
 System jest doskonale bezpieczny wtt. gdy
-- P(c = c0|m = m0) = P(c = c0)
-W kryptografii asymetrycznej jest wprost przeciwnie
+- `P(c = c0|m = m0) = P(c = c0)`
+- W kryptografii asymetrycznej jest wprost przeciwnie
 
 ### Wniosek 2:
 System jest doskonale bezpieczny wtt. gdy
-- P(c = c0|m = m0) = P(c = c0|m = m1) dla m0, m1 ∈ M
+- `P(c = c0|m = m0) = P(c = c0|m = m1)` dla `m0, m1 ∈ M`
 
 ### Wersja z grą:
 - Ewa wybiera dwa teksty jawne: m0, m1
