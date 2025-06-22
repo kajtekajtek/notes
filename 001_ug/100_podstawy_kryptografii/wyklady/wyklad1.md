@@ -81,7 +81,7 @@ interesuje
 - **kryptoanaliza**: wypróbowanie 25 przesunięć. Jedna litera pary tekst jawny+zaszyfrowany wystarczy by odgadnac klucz.
 
 ## Szyfr  afiniczny
-- **szyfrowanie**: y = ax + b mod 266
+- **szyfrowanie**: y = ax + b mod 26
 - **odszyfrowywanie**: x = ((y - b) / a) mod 26
 - musi być określone dzielenie 1/a = a′ t.ż. a · a′ = 1 mod 26. Istnieje w.t.w. gdy **NWD(a, 26) = 1**
 - dla klucza (13, 4) „input” i „alter” szyfrują się do „ERRER”
