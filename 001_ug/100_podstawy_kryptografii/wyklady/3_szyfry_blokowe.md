@@ -2,20 +2,63 @@
 
 ## Funkcje pseudolosowe  
 - Oznaczenie: \[n\] = zbiór ciągów bitów długości n, operacja ⊕ = dodawanie bitów mod 2.  
-- Funkcja F: \[n\] × \[n\] → \[n\], efektywna w czasie wielomianowym (PPT), klucz k ∈ \[n\].  
+- Funkcja `F: [n] × [n] → [n]`, efektywna w czasie wielomianowym (PPT), klucz k ∈ \[n\].  
 - F jest **pseudolosowa**, jeśli przeciwnik w zasobach PPT nie odróżni F(k,·) od prawdziwej losowej funkcji f, nawet znając część jej wartości.  
 - Funkcje pierwszego typu (z zakresem ≤2ⁿ) jest 2ⁿ, drugiego typu (permutacje) jest (2ⁿ)!.  
 - Sam zapis f: \[n\]→\[n\] wymaga wykładniczych zasobów, więc PPT-owy F jest cenny.
 
 ## Permutacje pseudolosowe  
-- F: \[n\]×\[n\]→\[n\] jest **permutacją z kluczem**, jeśli dla każdego k, F(k,·) jest bijekcją.  
+- `F: [n]×[n]→[n]` jest **permutacją z kluczem**, jeśli dla każdego k, F(k,·) jest bijekcją.  
 - F jest **pseudolosową permutacją**, jeśli F(k,·) i jej odwrotność są nieodróżnialne od losowych permutacji.  
 - Można wymagać, by i F⁻¹(k,·) była pseudolosowa.
 
-**Szyfry blokowe** to szyfry symetryczne operujące na blokach danych o ustalonym rozmiarze.
+## Szyfry blokowe 
+- szyfry symetryczne operujące na blokach danych o ustalonym rozmiarze.
 - **Działają w rundach**: w każdej rundzie dane są poddawane kolejnym operacjom (dodanie klucza, podstawienie bitów/bajtów, permutacje, itp.).
 - Po zakończeniu określonej liczby rund **otrzymujemy zaszyfrowany blok**.
 - Ten sam szyfr (wraz z kluczem) można zastosować w różnych trybach pracy (ECB, CBC, OFB itp.), aby przetwarzać większe wiadomości niż pojedynczy blok.
+
+## Tryby szyfrowania blokowego  
+
+### ECB (Electronic Code Book)
+- każdy blok mj szyfrowany niezależnie: `cj = Enc(k, mj)`.  
+- zalety: prostota, równoległość
+- wady: deterministyczność, wykrywalność powtarzających się bloków.  
+
+### CBC (Cipher Block Chaining)
+- `cj = Enc(k, mj ⊕ cj−1)`, `c0 = IV`.  
+- Zalety:
+    - jeśli F jest permutacją pseudolosową, a wektor początkowy jest losowy, to szyfr jest bezpieczny na atak z wybranym tekstem jawnym
+- Wady: 
+    - przetwarzanie musi być sekwencyjne, nie ma szansy na wykorzystanie ew. równoległości obliczeń
+    - błąd w jednym bicie kryptogramu powoduje błąd w dwóch odszyfrowanych blokach
+
+### OFB (Output Feedback)
+- strumień rj generowany: `r0 = IV`, `rj = Enc(k, rj−1)`.
+- `mj ⊕ rj = cj -> cj ⊕ rj = mj`
+- Zalety:
+    - błędy w szyfrogramie nie propagują się wcale
+    - ciąg rj można przygotować przed otrzymaniem szyfrogramu
+    - jeśli F jest funkcją pseudolosową, to szyfr jest bezpieczny na atak z wybranym tekstem jawnym
+    - pod warunkiem, że wektor początkowy jest losowy
+    - F nie musi być permutacją
+- Wady:
+    - nie można wykorzystać przetwarzania współbieżnego
+
+### CFB (Cipher Feedback)
+- `cj = mj ⊕ Enc(k, c{j−1})`, `c0 = IV`.  
+- sekwencyjne przetwarzanie, błąd propaguje się na dwa bloki.  
+
+### CTR (Counter)
+- `rj = Enc(k, ctr + j)`, gdzie `ctr = IV`, licznik inkrementowany.  
+- rejestr jest licznikiem, umożliwia działanie współbieżne
+- można szyfrować niezależne fragmenty
+
+## Właściwości trybów blokowych  
+- **Bezpieczeństwo:** rośnie z rozmiarem bloku (≥128 bitów dziś).  
+- **Odporny na atak z wybranym kryptogramem:** strumieniowe tryby (OFB, CFB, CTR) zapewniają, że lekkie zaburzenie w szyfrogramie daje minimalne zmiany w odszyfrowaniu.  
+- **CBC:** błąd w jednym bicie szyfrogramu psuje dwa bloki odszyfrowane (propagacja błędu).  
+- **ECB:** odradzany ze względu na deterministyczność i powtarzalność wzorców.
 
 ## Koncepcje Shannona: konfuzja i dyfuzja
 **Konfuzja** – wprowadzenie jak największego „zamieszania” w relacji między kluczem a szyfrogramem, aby przeciwnik nie mógł wnioskować o kluczu, znając tekst jawny i szyfrogram.
