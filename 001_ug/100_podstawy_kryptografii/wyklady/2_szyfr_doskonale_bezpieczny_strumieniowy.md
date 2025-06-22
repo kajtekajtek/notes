@@ -27,36 +27,40 @@ System jest doskonale bezpieczny wtt. gdy
 - **system jest doskonale bezpieczny wtt. gdy Ewa odnosi sukces z prawdopodobieństwem 1/2**
 
 ## Złożoność obliczeniowa
-System **doskonale bezpieczny** (perfect security):
+
+### System **doskonale bezpieczny** (perfect security)
 - **klucz** musi być co najmniej tak **długi jak tekst jawny** i użyty tylko jeden raz
 - założenia zbyt ograniczające praktyczne zastosowania
-**Bezpieczeństwo obliczeniowe** (computational security):
+
+### Bezpieczeństwo obliczeniowe (computational security)
 - system musi być **bezpieczny wobec obliczeń możliwych do**
 **wykonania w rozsądnym czasie**
 - bezpieczny z prawdopodobieństwem bliskim 1
-- tzn. dopuszczamy możliwość złamania szyfru mało prawdopodobnym przypadkiem albo wskutek długich obliczeń
-Założenia: złożoność szyfru mierzona jest parametrem n, przeciwnik działa w czasie wielomianowym (C · nc dla pewnych C i c)
+    - tzn. dopuszczamy możliwość złamania szyfru mało prawdopodobnym przypadkiem albo wskutek długich obliczeń
+- Założenia: złożoność szyfru mierzona jest parametrem n, przeciwnik działa w czasie wielomianowym (C · nc dla pewnych C i c)
 - system jest bezpieczny jeśli prawdopodobieństwo złamania **jest mniejsze niż** $\frac{1}{c^n}$ dla dowolnego c
-Algorytm działa **w czasie wielomianowym (na wejściu x)**
-- wynik jest wyprodukowany po **p(|x|)** krokach, p – pewien wielomian
-**Algorytm probabilistyczny** działa w czasie wielomianowym jeśli dodatkowo odczytuje co najwyżej **p(|x|) losowych bitów**
-- oznaczenie **PPT**
-Obie klasy algorytmów są zamknięte na złożenia i inne operacje
-Funkcja f jest **zaniedbywalnie mała**
-- jeśli ∀p ∈ PPT . ∃N ∈ N. ∀n > N. f (n) < $\frac{1}{p(n)}$
-- np. 2−n, 2−√n, n− log n
-Funkcje zaniedbywalnie małe są zamknięte na dodawanie i mnożenie przez wielomian
+- Algorytm działa **w czasie wielomianowym (na wejściu x)**
+    - wynik jest wyprodukowany po **p(|x|)** krokach, p – pewien wielomian
+- **Algorytm probabilistyczny** działa w czasie wielomianowym jeśli dodatkowo odczytuje co najwyżej **p(|x|) losowych bitów**
+    - oznaczenie **PPT**
+    Obie klasy algorytmów są zamknięte na złożenia i inne operacje
+    Funkcja f jest **zaniedbywalnie mała**
+    - jeśli ∀p ∈ PPT . ∃N ∈ N. ∀n > N. f (n) < $\frac{1}{p(n)}$
+    - np. 2−n, 2−√n, n− log n
+    - Funkcje zaniedbywalnie małe są zamknięte na dodawanie i mnożenie przez wielomian
 
 ## Dwa rodzaje ataków
-*Dec* : K × C → M
+*Dec* : `K × C → M`
 - **|K | <= |M| ≈ |C |**, dużo mniejsza przestrzeń kluczy
-**Atak brutalny**
+
+### Atak brutalny
 - wypróbowanie każdego możliwego klucza
 - Dec(K , c0) ⊆ M
 - albo atak z parą ⟨m0, c0⟩ i wówczas znajdujemy Dec(k0, c0) = m0
 - albo trzeba jakoś wiedzieć, że k0 jest kluczem
 - prawdopodobieństwo znalezienia klucza = 1
-**Zgadywanie**
+
+### Zgadywanie
 - testujemy tylko jeden klucz, Dec(k0, c0)
 - prawdopodobieństwo znalezienia = $\frac{1}{|K|}$
 Czyli przestrzeń klucza musi być ponadwielomianowa dla parametru szyfru

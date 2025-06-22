@@ -25,8 +25,8 @@ parametr $n \rightarrow \infty$
 - **liniowa**: n, żadna złożoność
 - **wielomianowa**: np.: $n^2, n^3, n^{100}$
 - **wykładnicza**: $2^n, n!, n^n$
-- **ponadwielomianowa**, choć nie wykładnicza: $e^\sqrt{n}$
-**Stała też się liczy**, np. n = 1024 bity i tylko ta wielkość nas
+- **ponadwielomianowa**, choć nie wykładnicza: `e^\sqrt{2}`
+- **Stała też się liczy**, np. n = 1024 bity i tylko ta wielkość nas
 interesuje
 
 ## Założenia kryptografii
