@@ -36,26 +36,14 @@
 
 ## 3. Kryptografia asymetryczna: szyfrowanie i podpis  
 1. **Szyfrowanie (tajność):**  
-   - Alicja szyfruje wiadomość m kluczem publicznym Boba:  
-     ```
-     c = Enc(Kₑᴮ, m)
-     ```  
-   - Bob odszyfrowuje:  
-     ```
-     m = Dec(K_dᴮ, c)
-     ```  
-   - **Tylko Bob ma K_dᴮ ⇒ tylko on może odczytać m**.
+   - Alicja szyfruje wiadomość m kluczem publicznym Boba: `c = Enc(Keb, m)`
+   - Bob odszyfrowuje: `m = Dec(Kdb, c)`
+   - **Tylko Bob ma Kdb ⇒ tylko on może odczytać m**.
 2. **Podpis cyfrowy (autentyczność, nieodrzeczalność):**  
-   - Role kluczy zamienione: prywatny Alicji (K_dᴬ) i publiczny Alicji (Kₑᴬ).  
-   - Alicja “szyfruje” (podpisuje) m:  
-     ```
-     s = S(K_dᴬ, m)
-     ```  
-   - Każdy weryfikuje podpis:  
-     ```
-     V(Kₑᴬ, m, s) ⇒ true/false
-     ```  
-   - Dowodzi, że tylko **Alicja (znająca K_dᴬ) mogła stworzyć s**.
+   - Role kluczy zamienione: prywatny Alicji (Kda) i publiczny Alicji (Kea).  
+   - Alicja “szyfruje” (podpisuje) m: `s = S(Kda, m)`
+   - Każdy weryfikuje podpis: `V(Kea, m, s) ⇒ true/false`
+   - Dowodzi, że tylko **Alicja (znająca Kda) mogła stworzyć s**.
 
 ---
 

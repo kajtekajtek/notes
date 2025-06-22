@@ -37,7 +37,7 @@ a^{p–1} ≡ 1 mod p
 - Dla n=p·q (p≠q): φ(n)=(p–1)(q–1).
 
 ## Twierdzenie Eulera  
-- Jeżeli gcd(a,n)=1, to  
+- Jeżeli NWD(a,n)=1, to  
 
 a^{φ(n)} ≡ 1 mod n
 
@@ -53,18 +53,9 @@ a^{φ(n)} ≡ 1 mod n
 - Wybieramy duże p,q (≥500 bitów), N=p·q, φ(N)=(p–1)(q–1).  
 - Losujemy e ∈ ℤₙ*; obliczamy d: e·d≡1 mod φ(N) (alg. Euklidesa).  
 - Klucz publiczny: (N,e), prywatny: (N,d).  
-- Szyfrowanie:  
-
-c = mᵉ mod N
-
-- Deszyfracja:  
-
-m = cᵈ mod N
-
-- Uzasadnienie:  
-
-(mᵉ)ᵈ = m^{e·d} ≡ m^{1 + k·φ(N)} ≡ m·(m^{φ(N)})ᵏ ≡ m mod N
-
+- **Szyfrowanie**: `c = mᵉ mod N`
+- **Deszyfracja**: `m = cᵈ mod N`
+- **Uzasadnienie**: `(mᵉ)ᵈ = m^{e·d} ≡ m^{1 + k·φ(N)} ≡ m·(m^{φ(N)})ᵏ ≡ m mod N`
 
 ## Złożoność RSA vs łamanie  
 | n-bitów | generacja ≈O(n³) | faktoryzacja ≈exp(2√n) |  
@@ -105,18 +96,12 @@ m = cᵈ mod N
 ## Szyfr ElGamal  
 - Publiczny klucz Boba: (p, g, β = gᵇ mod p). Prywatny: b.  
 - Szyfrowanie m<p:  
-1. wybierz y losowo,  
-2. r = gʸ mod p,  
-3. t = βʸ·m mod p,  
-4. szyfrogram = (r, t).  
-- Deszyfrowanie przez Boba:  
-
-m = t · r^{–b} mod p
-
-- Uzasadnienie:  
-
-t·r^{–b} = (g^{b·y}·m) · (gʸ)^{–b} = m mod p
-
+  1. wybierz y losowo,  
+  2. r = gʸ mod p,  
+  3. t = βʸ·m mod p,  
+  4. szyfrogram = (r, t).  
+- **Deszyfrowanie** przez Boba: `m = t · r^{–b} mod p`
+- **Uzasadnienie**: `t·r^{–b} = (g^{b·y}·m) · (gʸ)^{–b} = m mod p`
 
 ## Własności ElGamal  
 - Złamanie ⇒ rozwiązanie obliczeniowego DH (DH-hard).  
