@@ -68,9 +68,10 @@ są wiadomość m oraz skrót h(m), odczytywane są m1 oraz h1, jeśli h(m1) =/=
 ---
 
 ## 🎂 Atak urodzinowy
-
-- Prawdopodobieństwo kolizji rośnie szybciej niż intuicyjnie oczekiwane.
-- Dla funkcji `n`-bitowej, potrzebujemy ~√(2^n) prób do znalezienia kolizji.
+- Celem ataku urodzinowego jest **znalezienie kolizji funkcji haszującej**.
+- U jego podstaw leży paradoks dnia urodzin, który pozwala oczekiwać, że **kolizja zostanie znaleziona znacznie szybciej niż sugerowałby to rozmiar przeciwdziedziny funkcji haszującej**. Liczba potrzebnych do tego sprawdzeń rośnie bowiem proporcjonalnie do pierwiastka z liczby wszystkich możliwych wyników funkcji haszującej. 
+- Dla funkcji generującej n-bitowe skróty, potrzebujemy `~√(2^n)` prób do znalezienia kolizji.
+- **Przykład**: Algorytm haszujący *MD5* generuje 128-bitowe skróty. Daje nam to `2^128` różnych skrótów. Aby jednak trafić na dwa identyczne skróty z 50% prawdopodobieństwem, wystarczy wygenerować ok. `1,1774 ⋅ 2^64` skrótów. 
 - Wniosek: funkcja skrótu powinna mieć co najmniej 160 bitów.
 
 ---
@@ -197,14 +198,13 @@ Funkcja skrótu h pozwala wygenerować ciąg pseudolosowy
 
 ## Szyfrowanie i uwierzytelnianie
 - Dane dwa klucze, jak zapewnić poufność i integralność?
-1) przesłać Enc(k1, m) oraz MAC (k2, m)
+- przesłać Enc(k1, m) oraz MAC(k2, m)
   - ale MAC może ujawnić całą wiadomość
   - a praktycznie zawsze jest deterministyczny: ŹLE
-2) przesłać Enc(k1, m||MAC (k2, m))
-- szyfr nie musi być odporny na atak z wybranym
-kryptogramem
-- być może nawet da się odtworzyć cały tekst jawny: ŹLE
-3) **Prawidłowe rozwiązanie**: przesłać Enc(k1, m) oraz MAC (k2, Enc(k1, m))
+- przesłać Enc(k1, m||MAC (k2, m))
+  - szyfr nie musi być odporny na atak z wybranym kryptogramem
+  - być może nawet da się odtworzyć cały tekst jawny: ŹLE
+- **Prawidłowe rozwiązanie**: przesłać Enc(k1, m) oraz MAC(k2, Enc(k1, m))
   - uniemożliwia atak przez modyfikację kryptogramu
   - bezpieczeństwo takie same jak dla Enc
   - UWAGA: MAC i Enc mogą być funkcjami wzajemnie

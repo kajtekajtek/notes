@@ -1,0 +1,12 @@
+# 🔑 MD5
+- Autor: Rivest
+- Skrót 128 bitowy
+  - 4 rejestry 32 bitowe
+  - 64 rundy (4 cykle po 16)
+  - w każdym cyklu inna funkcja nieliniowa z efektem lawinowym, przesunięcia bitów, dodawanie z bieżącymi danymi
+- MD2, inna funkcja
+  - bardzo wolna
+  - ale chyba bezpieczniejsza
+  - jest używana w protokole PEM, bezpiecznej poczty elektronicznej
+- Wiele znanych kolizji.
+- Obecnie niezalecany w zastosowaniach bezpieczeństwa.
